@@ -1,6 +1,6 @@
 import org.sql2o.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.*;
 
 public class Animal {
   public String name;
@@ -39,7 +39,7 @@ public class Animal {
     }
   }
 
-  public static List<Animal> all() {
+  public static List<Animal> allAnimals() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals;";
       return con.createQuery(sql)

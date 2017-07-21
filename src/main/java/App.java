@@ -13,7 +13,7 @@ public class App {
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("animals", Animal.all());
+      model.put("animals", Animal.allAnimals());
       model.put("endangeredAnimals", EndangeredAnimal.all());
       model.put("sightings", Sighting.all());
       model.put("template", "templates/index.vtl");
@@ -43,7 +43,7 @@ public class App {
       Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
       sighting.save();
       model.put("sighting", sighting);
-      model.put("animals", Animal.all());
+      model.put("animals", Animal.allAnimals());
       String animal = Animal.find(animalIdSelected).getName();
       model.put("animal", animal);
       model.put("template", "templates/success.vtl");
@@ -52,7 +52,9 @@ public class App {
 
     get("/animal/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("animals", Animal.all());
+      model.put("animalHealth", EndangeredAnimal.HEALTH_OPTIONS);
+      model.put("animalAge", EndangeredAnimal.AGE_OPTIONS);
+      model.put("animals", Animal.allAnimals());
       model.put("endangeredAnimals", EndangeredAnimal.all());
       model.put("template", "templates/animal-form.vtl");
       return new ModelAndView(model, layout);
@@ -67,13 +69,13 @@ public class App {
         String age = request.queryParams("age");
         EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
         endangeredAnimal.save();
-        model.put("animals", Animal.all());
+        model.put("animals", Animal.allAnimals());
         model.put("endangeredAnimals", EndangeredAnimal.all());
       } else {
         String name = request.queryParams("name");
         Animal animal = new Animal(name);
         animal.save();
-        model.put("animals", Animal.all());
+        model.put("animals", Animal.allAnimals());
         model.put("endangeredAnimals", EndangeredAnimal.all());
       }
       response.redirect("/");

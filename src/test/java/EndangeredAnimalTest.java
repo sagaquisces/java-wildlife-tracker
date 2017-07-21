@@ -11,7 +11,7 @@ public class EndangeredAnimalTest {
 
   @Test
   public void endangeredAnimal_instantiatesCorrectly_true() {
-    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "healthy", "young");
     assertEquals(true, testEndangeredAnimal instanceof EndangeredAnimal);
   }
 
@@ -31,9 +31,9 @@ public class EndangeredAnimalTest {
 
   @Test
   public void all_returnsAllInstancesOfEndangeredAnimal_true() {
-    EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Fox", "healthy", "young");
     firstEndangeredAnimal.save();
-    EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Badger", "Okay", "Adult");
+    EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Badger", "okay", "adult");
     secondEndangeredAnimal.save();
     assertEquals(true, EndangeredAnimal.all().get(0).equals(firstEndangeredAnimal));
     assertEquals(true, EndangeredAnimal.all().get(1).equals(secondEndangeredAnimal));

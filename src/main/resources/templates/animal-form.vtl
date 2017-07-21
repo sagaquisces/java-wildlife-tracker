@@ -12,18 +12,25 @@
 
   <label>Health</label>
   <select name="health">
-    <option>Ill</option>
+    #foreach ($health in $animalHealth)
+      <option>$health</option>
+    #end
+    <!-- <option>Ill</option>
     <option>Okay</option>
-    <option>Healthy</option>
+    <option>Healthy</option> -->
   </select>
 
   <label>Age</label>
   <select name="age">
-    <option>Newborn</option>
+    <!-- <option>Newborn</option>
     <option>Young</option>
-    <option>Adult</option>
+    <option>Adult</option> -->
+    #foreach ($age in $animalAge)
+      <option>$age</option>
+    #end
+
   </select>
 
   <button type="submit">Add Animal</button>
-  
+
 </form>

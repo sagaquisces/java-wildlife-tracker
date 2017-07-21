@@ -1,16 +1,17 @@
 import org.sql2o.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class EndangeredAnimal {
-  public String name;
-  public int id;
+public class EndangeredAnimal extends Animal{
+  // public String name;
+  // public int id;
   public boolean endangered;
   private String health;
   private String age;
+  public static final List<String> HEALTH_OPTIONS = Arrays.asList("healthy", "ill", "ok");
+  public static final List<String> AGE_OPTIONS = Arrays.asList("newborn", "young", "adult");
 
   public EndangeredAnimal(String name, String health, String age) {
-    this.name = name;
+    super(name);
     this.id = id;
     this.health = health;
     this.age = age;
