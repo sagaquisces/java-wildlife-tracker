@@ -43,6 +43,7 @@ public class Animal {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals;";
       return con.createQuery(sql)
+      .throwOnMappingFailure(false)
         .executeAndFetch(Animal.class);
     }
   }
@@ -52,6 +53,7 @@ public class Animal {
       String sql = "SELECT * FROM animals WHERE id=:id;";
       Animal animal = con.createQuery(sql)
         .addParameter("id", id)
+        .throwOnMappingFailure(false)
         .executeAndFetchFirst(Animal.class);
       return animal;
     }

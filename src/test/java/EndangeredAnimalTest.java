@@ -63,5 +63,30 @@ public class EndangeredAnimalTest {
     testEndangeredAnimal.updateAge("Adult");
     assertEquals("Adult", EndangeredAnimal.find(testEndangeredAnimal.getId()).getAge());
   }
+ // tests added my MD
 
+ @Test
+ public void getEndangered_returnstrue() {
+   EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+   assertTrue(testEndangeredAnimal.getEndangered());
+ }
+
+ @Test
+ public void save_marksTrueForEndangeredInDB() {
+   EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+   testEndangeredAnimal.save();
+   EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
+   assertTrue(savedEndangeredAnimal.getEndangered());
+ }
+
+ @Test
+ public void all_returnOnlyEndangeredAnimals_2() {
+   EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+   firstEndangeredAnimal.save();
+   EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Badger", "okay", "adult");
+   secondEndangeredAnimal.save();
+   Animal testAnimal = new Animal ("Deer");
+   testAnimal.save();
+   assertEquals(2, EndangeredAnimal.all().size());
+ }
 }
