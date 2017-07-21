@@ -10,7 +10,7 @@ public class AnimalTest {
   public DatabaseRule database = new DatabaseRule();
 
   @Test
-  public void animal_instantiatesCorrectly_false() {
+  public void animal_instantiatesCorrectly_true() {
     Animal testAnimal = new Animal("Deer");
     assertEquals(true, testAnimal instanceof Animal);
   }
@@ -63,11 +63,12 @@ public class AnimalTest {
     assertEquals(0, Animal.all().size());
   }
 
+  @Test
   public void updateName_updatesAnimalNameInDatabase_String() {
     Animal testAnimal = new Animal("Deer");
     testAnimal.save();
     testAnimal.updateName("Buck");
-    assertEquals("Buck", testAnimal.getName());
+    assertEquals("Buck", Animal.find(testAnimal.getId()).getName());
   }
 
   @Test
