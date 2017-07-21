@@ -5,10 +5,12 @@ import java.util.*;
 public class Animal {
   public String name;
   public int id;
+  public boolean endangered;
 
   public Animal(String name) {
     this.name = name;
     this.id = id;
+    this.endangered = false;
   }
 
   public String getName() {
@@ -17,6 +19,10 @@ public class Animal {
 
   public int getId() {
     return id;
+  }
+
+  public boolean getEndangered() {
+    return endangered;
   }
 
   @Override
@@ -31,9 +37,10 @@ public class Animal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name) VALUES (:name);";
+      String sql = "INSERT INTO animals (name, endangered) VALUES (:name, :endangered);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
+        .addParameter("endangered", this.endangered)
         .executeUpdate()
         .getKey();
     }
@@ -44,7 +51,7 @@ public class Animal {
       String sql = "SELECT * FROM animals;";
       return con.createQuery(sql)
       .throwOnMappingFailure(false)
-        .executeAndFetch(Animal.class);
+      .executeAndFetch(Animal.class);
     }
   }
 
