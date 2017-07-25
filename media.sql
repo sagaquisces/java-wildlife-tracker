@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: animals; Type: TABLE; Schema: public; Owner: michaeldunlap
+-- Name: animals; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE animals (
@@ -47,10 +47,10 @@ CREATE TABLE animals (
 );
 
 
-ALTER TABLE animals OWNER TO michaeldunlap;
+ALTER TABLE animals OWNER TO "Guest";
 
 --
--- Name: animals_id_seq; Type: SEQUENCE; Schema: public; Owner: michaeldunlap
+-- Name: animals_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE animals_id_seq
@@ -61,31 +61,32 @@ CREATE SEQUENCE animals_id_seq
     CACHE 1;
 
 
-ALTER TABLE animals_id_seq OWNER TO michaeldunlap;
+ALTER TABLE animals_id_seq OWNER TO "Guest";
 
 --
--- Name: animals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: michaeldunlap
+-- Name: animals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE animals_id_seq OWNED BY animals.id;
 
 
 --
--- Name: sightings; Type: TABLE; Schema: public; Owner: michaeldunlap
+-- Name: sightings; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE sightings (
     id integer NOT NULL,
     animal_id integer,
     location character varying,
-    ranger_name character varying
+    ranger_name character varying,
+    submittime timestamp without time zone
 );
 
 
-ALTER TABLE sightings OWNER TO michaeldunlap;
+ALTER TABLE sightings OWNER TO "Guest";
 
 --
--- Name: sightings_id_seq; Type: SEQUENCE; Schema: public; Owner: michaeldunlap
+-- Name: sightings_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE sightings_id_seq
@@ -96,61 +97,63 @@ CREATE SEQUENCE sightings_id_seq
     CACHE 1;
 
 
-ALTER TABLE sightings_id_seq OWNER TO michaeldunlap;
+ALTER TABLE sightings_id_seq OWNER TO "Guest";
 
 --
--- Name: sightings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: michaeldunlap
+-- Name: sightings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE sightings_id_seq OWNED BY sightings.id;
 
 
 --
--- Name: animals id; Type: DEFAULT; Schema: public; Owner: michaeldunlap
+-- Name: animals id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY animals ALTER COLUMN id SET DEFAULT nextval('animals_id_seq'::regclass);
 
 
 --
--- Name: sightings id; Type: DEFAULT; Schema: public; Owner: michaeldunlap
+-- Name: sightings id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq'::regclass);
 
 
 --
--- Data for Name: animals; Type: TABLE DATA; Schema: public; Owner: michaeldunlap
+-- Data for Name: animals; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY animals (id, name, health, age, endangered) FROM stdin;
+1	Lion	\N	\N	f
 \.
 
 
 --
--- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: michaeldunlap
+-- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 8, true);
+SELECT pg_catalog.setval('animals_id_seq', 1, true);
 
 
 --
--- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: michaeldunlap
+-- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY sightings (id, animal_id, location, ranger_name) FROM stdin;
+COPY sightings (id, animal_id, location, ranger_name, submittime) FROM stdin;
+1	1	Fairbanks	Michael Ranger	2017-07-25 14:36:01.111106
 \.
 
 
 --
--- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: michaeldunlap
+-- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 8, true);
+SELECT pg_catalog.setval('sightings_id_seq', 1, true);
 
 
 --
--- Name: animals animals_pkey; Type: CONSTRAINT; Schema: public; Owner: michaeldunlap
+-- Name: animals animals_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY animals
@@ -158,7 +161,7 @@ ALTER TABLE ONLY animals
 
 
 --
--- Name: sightings sightings_pkey; Type: CONSTRAINT; Schema: public; Owner: michaeldunlap
+-- Name: sightings sightings_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY sightings
@@ -168,4 +171,3 @@ ALTER TABLE ONLY sightings
 --
 -- PostgreSQL database dump complete
 --
-
