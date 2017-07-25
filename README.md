@@ -28,7 +28,7 @@ These were changes by me to put Animals and the subclass EndangeredAnimals in on
 And a later change to tag endangered animals in the DB:
 
 * `ALTER TABLE animals ADD endangered boolean;`
-* `ALTER TABLE sightings ADD sightingtime timestamp;`
+* `ALTER TABLE sightings ADD submittime timestamp;`
 
 Finally:
 
