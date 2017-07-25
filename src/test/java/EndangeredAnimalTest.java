@@ -75,8 +75,8 @@ public class EndangeredAnimalTest {
  public void save_marksTrueForEndangeredInDB() {
    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
    testEndangeredAnimal.save();
-   EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
-   assertTrue(savedEndangeredAnimal.getEndangered());
+   // EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
+   assertTrue(testEndangeredAnimal.getEndangered());
  }
 
  @Test

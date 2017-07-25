@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.text.DateFormat;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class SightingTest {
@@ -68,6 +69,17 @@ public class SightingTest {
   @Test
   public void find_returnsNullWhenNoSightingFound_null() {
     assertTrue(Sighting.find(999) == null);
+  }
+
+  @Test
+  public void save_recordsTimeOfCreationInDatabase() {
+    Animal testAnimal = new Animal("Deer");
+    testAnimal.save();
+    Sighting testSighting = new Sighting (testAnimal.getId(), "45.472428, -121.946466", "Ranger Avery");
+    testSighting.save();
+    Timestamp savedSubmitTime = Sighting.find(testSighting.getId()).getSubmitTime();
+    Timestamp rightNow = new Timestamp(new Date().getTime());
+    assertEquals(rightNow.getDay(), savedSubmitTime.getDay());
   }
 
 }
